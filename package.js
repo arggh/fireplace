@@ -10,9 +10,9 @@ Package.onUse(function(api) {
   api.versionsFrom('1.6.1');
   api.use([
     'ecmascript',
-    'templating',
-    'reactive-var',
-    'blaze',
+    'templating@1.3.0',
+    'reactive-var@1.0.11',
+    'blaze@2.3.0',
   ], 'client');
 
   api.addFiles([
