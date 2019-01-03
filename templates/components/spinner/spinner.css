@@ -1,0 +1,38 @@
+/* Spinner courtesy of https://codepen.io/vineethtr/pen/GJpxoQ */
+
+.FireplaceSpinner {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid #999;
+  border-radius: 0;
+  animation: FireplaceRotate 3s infinite;
+}
+.FireplaceSpinner:after, .FireplaceSpinner:before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #555555;
+  animation: FireplaceRotate 3s infinite reverse;
+}
+.FireplaceSpinner:before {
+  border-color: #fff;
+  left: 10px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  animation: FireplaceRotate 2s infinite;
+}
+
+@keyframes FireplaceRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

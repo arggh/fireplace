@@ -1,0 +1,211 @@
+.fireplace-container, .fireplace-overlay {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.fireplace-container {
+  transition-property: opacity;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+  opacity: 0;
+}
+
+.fireplace-container.fireplace-reveal {
+  opacity: 1;
+}
+
+.fireplace-container svg {
+  stroke: #222222;
+}
+
+.fireplace-overlay {
+  background-color: #E9EEFC;
+  z-index: 1;
+}
+
+.fireplace-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+  animation-name: FireplacePop;
+  animation-delay: 0;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: backwards;
+}
+
+.fireplace-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.fireplace-content__header {
+  position: relative;
+  z-index: 2;
+  height: 2rem;
+  padding: .5rem .75rem;
+  flex: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fireplace-count {
+  min-width: 48px;
+}
+
+.fireplace-count__value {
+  font-size: 13px;
+  font-weight: bold;
+  color: #222222;
+  padding: 3px 6px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 2px;
+}
+
+.fireplace-content__main {
+  flex: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.fireplace-button__prev, .fireplace-button__next {
+  position: relative;
+  width: 4rem;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: opacity 200ms ease-in-out;
+}
+
+.fireplace-button__prev[disabled], .fireplace-button__next[disabled] {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.fireplace-content__middle {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fireplace-content__image {
+  flex: auto;
+}
+
+.fireplace-content__image--contain,
+.fireplace-content__image--cover {
+  text-align: center;
+  margin: 0;
+}
+
+.fireplace-content__image--cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.fireplace-content__image--contain {
+  max-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fireplace-content__image--contain img,
+.fireplace-content__image--cover img {
+  width: 100%;
+  height: 100%;
+}
+
+.fireplace-content__image--contain img {
+  object-fit: contain;
+}
+
+.fireplace-content__image--cover img {
+  object-fit: cover;
+}
+
+.fireplace-content__footer {
+  position: relative;
+  z-index: 2;
+  min-height: 2rem;
+  flex: none;
+  text-align: center;
+  padding: .5rem .75rem;
+}
+
+.fireplace-caption {
+  display: inline-block;
+  color: white;
+  background-color: rgba(0,0,0,0.4);
+  font-size: 16px;
+  padding: 4px 8px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Button resets */
+.fireplace-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fireplace-button svg {
+  display: inline-block;
+  position: relative;
+  transition-property: transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.5);
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+}
+
+.fireplace-button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.fireplace-button:focus svg {
+  transform: scale(1.1);
+}
+
+@keyframes FireplacePop {
+  0% { opacity: 0; transform: scale(0.5) translateY(-15px); }
+  0% { opacity: 1; transform: scale(1) translateY(0); }
+}

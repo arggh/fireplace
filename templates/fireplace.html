@@ -1,0 +1,46 @@
+<template name="Fireplace">
+  <div class="fireplace-container">
+    <div class="fireplace-overlay" style={{overlayStyles background}}></div>
+    {{#if isLoading}}
+      <div class="fireplace-loader">
+        {{> Template.dynamic template=(spinnerTempl loaderTemplate) data='' }}
+      </div>
+    {{/if}}
+    <div class="fireplace-content">
+      <div class="fireplace-content__header">
+        <div class="fireplace-count">
+          <span class="fireplace-count__value">{{imageCountLabel}}</span>
+        </div>
+        <button type="button" aria-label="Fullscreen" class="fireplace-fullscreen fireplace-button">
+          {{> Template.dynamic template=(fullscreenTmpl enterFullscreenTemplate exitFullscreenTemplate) data='' }}
+        </button>
+        <button type="button" aria-label="Close" class="fireplace-close fireplace-button">
+          {{> Template.dynamic template=(closeTmpl closeIconTemplate) data='' }}
+        </button>
+      </div>
+      <div class="fireplace-content__main">
+        <button type="button" class="fireplace-button__prev fireplace-button" disabled={{isPrevButtonDisabled}} >
+          {{> Template.dynamic template=(prevTmpl prevIconTemplate) data='' }}
+        </button>
+        <div class="fireplace-content__middle" style={{imageContainerStyles maxImageWidth}}>
+          <figure class={{imageContainerClass layout}}>
+            <img
+              src={{currentImage.src}}
+              srcSet={{formatSrcSetAttr currentImage.srcSet}}
+              alt={{currentImage.alt}}
+            >
+            {{#if currentImage.caption}}
+              <figcaption class="fireplace-caption">
+                {{currentImage.caption}}
+              </figcaption>
+            {{/if}}
+          </figure>
+        </div>
+        <button type="button" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >
+          {{> Template.dynamic template=(nextTmpl nextIconTemplate) data='' }}
+        </button>
+      </div>
+      <div class="fireplace-content__footer"></div>
+    </div>
+  </div>
+</template>
