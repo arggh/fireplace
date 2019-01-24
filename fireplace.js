@@ -7,6 +7,7 @@ export const Fireplace = function ({
   images = [],
   layout = 'contain',
   background,
+  loaderTemplate = null,
   maxImageWidth = 1300,
   startIndex = 0
 }) {
@@ -18,6 +19,7 @@ export const Fireplace = function ({
     layout,
     background,
     maxImageWidth,
+    loaderTemplate,
     startIndex,
     onCloseRequested: () => Blaze.remove(view)
   };

@@ -57,7 +57,7 @@
 .fireplace-content__header {
   position: relative;
   z-index: 2;
-  height: 2rem;
+  height: 3rem;
   padding: .5rem .75rem;
   flex: none;
 
@@ -191,8 +191,8 @@
   transition-timing-function: ease-in-out;
   border-radius: 50%;
   background-color: rgba(255,255,255,0.5);
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   padding: 6px;
 }
 

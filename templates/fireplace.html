@@ -1,6 +1,6 @@
 <template name="Fireplace">
   <div class="fireplace-container">
-    <div class="fireplace-overlay" style={{overlayStyles background}}></div>
+    <div class="fireplace-overlay" style="{{overlayStyles background}}"></div>
     {{#if isLoading}}
       <div class="fireplace-loader">
         {{> Template.dynamic template=(spinnerTempl loaderTemplate) data='' }}
