@@ -97,6 +97,23 @@
   transition: opacity 200ms ease-in-out;
 }
 
+@media screen and (max-width: 768px) {
+  .fireplace-button__prev, .fireplace-button__next {
+    position: absolute;
+    top: 4rem;
+    bottom: 4rem;
+    z-index: 3;
+  }
+
+  .fireplace-button__prev {
+    left: 0;
+  }
+
+  .fireplace-button__next {
+    right: 0;
+  }
+}
+
 .fireplace-button__prev[disabled], .fireplace-button__next[disabled] {
   pointer-events: none;
   opacity: 0;
