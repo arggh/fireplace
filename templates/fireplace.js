@@ -26,13 +26,19 @@ const IMAGE_CONTAINER_CLASSES = {
   contain: 'fireplace-content__image--contain'
 };
 
+const LAYOUT_MODES = {
+  cover: 'cover',
+  contain: 'contain',
+  auto: 'auto'
+};
+
 const WRAPPER_CLASSES = {
   reveal: 'fireplace-reveal'
 };
 
 const validateLayoutProp = (layout) => {
-  if (layout && !Object.keys(IMAGE_CONTAINER_CLASSES).includes(layout)) {
-    throw new Meteor.Error('validation-error', `Invalid value for prop 'layout': '${layout}'. Was expecting 'cover' or 'contain'`);
+  if (layout && !Object.keys(LAYOUT_MODES).includes(layout)) {
+    throw new Meteor.Error('validation-error', `Invalid value for prop 'layout': '${layout}'. Was expecting 'cover', 'contain' or 'auto'`);
   }
 };
 
@@ -116,6 +122,14 @@ const preload = (image) => {
     }
     imgEl.src = image.src;
   });
+};
+
+const resolveLayoutMode = (layout) => {
+  if (layout === LAYOUT_MODES.auto) {
+    return window.innerHeight > window.innerWidth ?
+      LAYOUT_MODES.contain : LAYOUT_MODES.cover;
+  }
+  return layout;
 };
 
 Template.Fireplace.onCreated(function onFireplaceCreated() {
@@ -223,7 +237,7 @@ Template.Fireplace.helpers({
 
   imageContainerClass(layout) {
     if (layout) {
-      return IMAGE_CONTAINER_CLASSES[layout];
+      return IMAGE_CONTAINER_CLASSES[resolveLayoutMode(layout)];
     }
     return IMAGE_CONTAINER_CLASSES.contain;
   },
@@ -233,12 +247,12 @@ Template.Fireplace.helpers({
   },
 
   imageContainerStyles(maxImageWidth) {
-    const isContained = Template.currentData().layout === 'contain';
+    const isContained = resolveLayoutMode(Template.currentData().layout) === 'contain';
     return maxImageWidth && isContained ? `width: ${maxImageWidth}px` : '';
   },
 
   imageStyles(layout) {
-    return layout ? `object-fit: ${layout};` : '';
+    return layout ? `object-fit: ${resolveLayoutMode(layout)};` : '';
   },
 
   isPrevButtonDisabled() {
