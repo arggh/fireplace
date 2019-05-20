@@ -150,7 +150,6 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
   this.currentIndex = new ReactiveVar(startIndex);
   this.fullscreenActive = new ReactiveVar(false);
   this.loading = new ReactiveVar(true);
-  this.autorun(() => console.log(`fullscreenActive: ${this.fullscreenActive.get()}`));
 
   /* Preload the initial images +1 from both directions */
   const startImage = images[startIndex];
