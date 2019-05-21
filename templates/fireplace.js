@@ -88,8 +88,21 @@ const requestFullscreen = (rootElement) => {
   }
 };
 
+const isFullscreenAvailable = () => {
+  return !!(document.fullscreenEnabled ||
+    document.webkitFullscreenEnabled ||
+    document.mozFullScreenEnabled ||
+    document.msFullscreenEnabled);
+};
+
+const isFullscreenActive = () => {
+  return !!(document.fullscreenElement ||
+    document.msFullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullscreenElement);
+};
+
 const requestExitFullscreen = () => {
-  debugger;
   if (document.exitFullscreen) {
     return document.exitFullscreen()
   } else if (document.mozCancelFullScreen) {
@@ -152,7 +165,6 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
   this.loading = new ReactiveVar(true);
 
   /* Preload the initial images +1 from both directions */
-  const startImage = images[startIndex];
   const beforeImage = images[startIndex - 1];
   const nextImage = images[startIndex + 1];
 
@@ -187,18 +199,24 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
       this.currentIndex.set(nextIndex);
       preload(images[oneAfter]);
     });
-    
   };
 
-  this.enterFullsreen = async () => {    
-    const wrapper = this.firstNode;
-    requestFullscreen(wrapper).then((res, rej) => this.fullscreenActive.set(!rej));
-    ;
+  this.toggleFullscreen = () => {
+    if (isFullscreenActive()) {
+      requestExitFullscreen();
+    } else {
+      requestFullscreen(this.firstNode);
+    }
   };
 
-  this.exitFullScreen = () => {
-    requestExitFullscreen().then(() => this.fullscreenActive.set(false));
+
+  this.fullscreenStateHandler = (event) => {
+    this.fullscreenActive.set(isFullscreenActive());
   };
+
+  document.onfullscreenchange = this.fullscreenStateHandler;
+  document.onmozfullscreenchange = this.fullscreenStateHandler;
+  document.onMSFullscreenChange = this.fullscreenStateHandler;
 });
 
 Template.Fireplace.onRendered(function onFireplaceCreated() {
@@ -226,19 +244,22 @@ Template.Fireplace.helpers({
     return customTemplate || DEFAULT_TEMPLATES.SPINNER;
   },
 
+  isFullscreenAvailable() {
+    return isFullscreenAvailable();
+  },
+
   fullscreenTmpl(customEnterTmpl, customExitTmpl) {
     const instance = Template.instance();
-    if (instance.fullscreenActive.get()) {
-      return customExitTmpl || DEFAULT_TEMPLATES.FULLSCREEN_EXIT;
-    }
-    return customEnterTmpl || DEFAULT_TEMPLATES.FULLSCREEN_ENTER;
+    const isActive = instance.fullscreenActive.get();
+    return isActive ?
+      customExitTmpl || DEFAULT_TEMPLATES.FULLSCREEN_EXIT :
+      customEnterTmpl || DEFAULT_TEMPLATES.FULLSCREEN_ENTER;
   },
 
   imageContainerClass(layout) {
-    if (layout) {
-      return IMAGE_CONTAINER_CLASSES[resolveLayoutMode(layout)];
-    }
-    return IMAGE_CONTAINER_CLASSES.contain;
+    return layout ?
+      IMAGE_CONTAINER_CLASSES[resolveLayoutMode(layout)] :
+      IMAGE_CONTAINER_CLASSES.contain;
   },
 
   overlayStyles(background) {
@@ -300,11 +321,7 @@ Template.Fireplace.events({
     templateInstance.navigate(1);
   },
   'click .fireplace-fullscreen'(event, templateInstance) {
-    if (templateInstance.fullscreenActive.get()) {
-      templateInstance.exitFullScreen()
-    } else {
-      templateInstance.enterFullsreen();
-    }
+    templateInstance.toggleFullscreen();
   },
   'click .fireplace-close'(event, templateInstance) {
     templateInstance.firstNode.classList.remove(WRAPPER_CLASSES.reveal);

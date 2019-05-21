@@ -1,5 +1,6 @@
 import { Blaze } from 'meteor/blaze';
 import { Template } from 'meteor/templating';
+import './templates/fireplace';
 
 // Variables exported by this module can be imported by other packages and
 // applications. See fireplace-tests.js for an example of importing.
