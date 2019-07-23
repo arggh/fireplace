@@ -133,6 +133,8 @@ const preload = (image) => {
       PRELOADED.push(image.src);
       resolve(imgEl);
     }
+    imgEl.srcset = image.srcSet;
+    imgEl.sizes = '100vw';
     imgEl.src = image.src;
   });
 };
