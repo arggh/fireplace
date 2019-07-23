@@ -183,15 +183,31 @@
 }
 
 .fireplace-caption {
-  display: inline-block;
+  display: block;
+  text-align: left;
   color: white;
   background-color: rgba(0,0,0,0.4);
-  font-size: 16px;
-  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.fireplace-caption small:empty {
+  display: none;
+}
+
+.fireplace-caption small {
+  display: block;
+}
+
+.fireplace-caption small:before {
+  content:  '©️';
+  display: inline;
+  margin-right: 4px;
 }
 
 /* Button resets */

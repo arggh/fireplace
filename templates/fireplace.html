@@ -29,11 +29,13 @@
             <img
               src={{currentImage.src}}
               srcSet={{formatSrcSetAttr currentImage.srcSet}}
+              sizes='100vw'
               alt={{currentImage.alt}}
             >
             {{#if currentImage.caption}}
               <figcaption class="fireplace-caption">
                 {{currentImage.caption}}
+                <small>{{currentImage.copyright}}</small>
               </figcaption>
             {{/if}}
           </figure>
