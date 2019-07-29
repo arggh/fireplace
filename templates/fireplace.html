@@ -27,17 +27,14 @@
         <div class="fireplace-content__middle" style={{imageContainerStyles maxImageWidth}}>
           <figure class={{imageContainerClass layout}}>
             <img
+              class="fireplace-image"
               src={{currentImage.src}}
               srcSet={{formatSrcSetAttr currentImage.srcSet}}
               sizes='100vw'
               alt={{currentImage.alt}}
             >
-            {{#if currentImage.caption}}
-              <figcaption class="fireplace-caption">
-                {{currentImage.caption}}
-                <small>{{currentImage.copyright}}</small>
-              </figcaption>
-            {{/if}}
+
+            <figcaption class="fireplace-caption">{{currentImage.caption}}{{#if currentImage.copyright}}<small>{{currentImage.copyright}}</small>{{/if}}</figcaption>
           </figure>
         </div>
         <button type="button" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >

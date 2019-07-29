@@ -194,12 +194,13 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
     const maxIndex = images.length - 1;
     const nextIndex = Math.max(0, Math.min(current + delta, maxIndex));
     const oneAfter = Math.max(0, Math.min(nextIndex + delta, maxIndex));
+    const twoAfter = Math.max(0, Math.min(nextIndex + (delta * 2), maxIndex));
 
-    this.loading.set(true);
-    preload(images[nextIndex]).then(() => {
-      this.loading.set(false);
-      this.currentIndex.set(nextIndex);
-      preload(images[oneAfter]);
+    this.currentIndex.set(nextIndex);
+    this.loaderTimeout = setTimeout(() => this.loading.set(true), 50);
+
+    preload(images[oneAfter]).then(() => {
+      preload(images[twoAfter]);
     });
   };
 
@@ -328,5 +329,9 @@ Template.Fireplace.events({
   'click .fireplace-close'(event, templateInstance) {
     templateInstance.firstNode.classList.remove(WRAPPER_CLASSES.reveal);
     Meteor.setTimeout(() => templateInstance.data.onCloseRequested(), 350);
-  }
+  },
+  'load .fireplace-image'(event, templateInstance) {
+    clearTimeout(templateInstance.loaderTimeout);
+    templateInstance.loading.set(false);
+  } 
 });

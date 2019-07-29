@@ -1,38 +1,33 @@
-/* Spinner courtesy of https://codepen.io/vineethtr/pen/GJpxoQ */
-
-.FireplaceSpinner {
-  position: relative;
+.FireplaceSpinner svg {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
   width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  border: 2px solid #999;
-  border-radius: 0;
-  animation: FireplaceRotate 3s infinite;
-}
-.FireplaceSpinner:after, .FireplaceSpinner:before {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 32px;
-  height: 32px;
-  border: 2px solid #555555;
-  animation: FireplaceRotate 3s infinite reverse;
-}
-.FireplaceSpinner:before {
-  border-color: #fff;
-  left: 10px;
-  top: 10px;
-  width: 22px;
-  height: 22px;
-  animation: FireplaceRotate 2s infinite;
+  height: 50px;  
 }
 
-@keyframes FireplaceRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+.FireplaceSpinner svg circle {
+  stroke: #8a8a8a;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
   }
 }

@@ -196,6 +196,10 @@
   right: 0;
 }
 
+.fireplace-caption:empty {
+  display: none;
+}
+
 .fireplace-caption small:empty {
   display: none;
 }
