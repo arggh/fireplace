@@ -77,6 +77,7 @@
   padding: 3px 6px;
   background-color: rgba(255,255,255,0.5);
   border-radius: 2px;
+  white-space: nowrap;
 }
 
 .fireplace-content__main {
