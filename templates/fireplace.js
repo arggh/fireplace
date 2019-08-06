@@ -6,6 +6,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // import { ReactiveDict } from 'meteor/reactive-dict';
 import './components/spinner/spinner.js';
 import './fireplace.html';
+import './icons/zoom.html';
 import './icons/arrow.html';
 import './icons/x.html';
 import './icons/maximize.html';
@@ -16,6 +17,7 @@ const DEFAULT_TEMPLATES = {
   ARROW_LEFT: 'FireplaceArrowRight',
   ARROW_RIGHT: 'FireplaceArrowLeft',
   CLOSE: 'FireplaceX',
+  ZOOM: 'FireplaceZoom',
   FULLSCREEN_ENTER: 'FireplaceMaximize',
   FULLSCREEN_EXIT: 'FireplaceMinimize',
   SPINNER: 'FireplaceSpinner'
@@ -165,6 +167,7 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
   this.currentIndex = new ReactiveVar(startIndex);
   this.fullscreenActive = new ReactiveVar(false);
   this.loading = new ReactiveVar(true);
+  this.layoutMode = new ReactiveVar(this.data.layout);
 
   /* Preload the initial images +1 from both directions */
   const beforeImage = images[startIndex - 1];
@@ -212,6 +215,14 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
     }
   };
 
+  this.toggleLayoutMode = () => {
+    const currentLayout = resolveLayoutMode(this.layoutMode.get());
+    if (currentLayout === LAYOUT_MODES.contain) {
+      this.layoutMode.set(LAYOUT_MODES.cover);
+    } else {
+      this.layoutMode.set(LAYOUT_MODES.contain);
+    }
+  }
 
   this.fullscreenStateHandler = (event) => {
     this.fullscreenActive.set(isFullscreenActive());
@@ -243,8 +254,17 @@ Template.Fireplace.helpers({
     return customTemplate || DEFAULT_TEMPLATES.CLOSE;
   },
 
-  spinnerTempl(customTemplate) {
+  spinnerTmpl(customTemplate) {
     return customTemplate || DEFAULT_TEMPLATES.SPINNER;
+  },
+
+  zoomTmpl(customTemplate) {
+    return customTemplate || DEFAULT_TEMPLATES.ZOOM;
+  },
+
+  layoutMode() {
+    const instance = Template.instance();
+    return resolveLayoutMode(instance.layoutMode.get());
   },
 
   isFullscreenAvailable() {
@@ -272,6 +292,14 @@ Template.Fireplace.helpers({
   imageContainerStyles(maxImageWidth) {
     const isContained = resolveLayoutMode(Template.currentData().layout) === 'contain';
     return maxImageWidth && isContained ? `width: ${maxImageWidth}px` : '';
+  },
+
+  zoomButtonIconProps(layout) {
+    const layoutMode = resolveLayoutMode(layout);
+    if (layoutMode === LAYOUT_MODES.contain) {
+      return { in: true };
+    }
+    return { in: false };
   },
 
   imageStyles(layout) {
@@ -330,8 +358,11 @@ Template.Fireplace.events({
     templateInstance.firstNode.classList.remove(WRAPPER_CLASSES.reveal);
     Meteor.setTimeout(() => templateInstance.data.onCloseRequested(), 350);
   },
+  'click .fireplace-zoom'(event, templateInstance) {
+    templateInstance.toggleLayoutMode();
+  },
   'load .fireplace-image'(event, templateInstance) {
     clearTimeout(templateInstance.loaderTimeout);
     templateInstance.loading.set(false);
-  } 
+  }
 });

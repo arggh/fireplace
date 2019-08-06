@@ -1,0 +1,20 @@
+<template name="FireplaceZoom">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <g fill="none">
+      <circle cx="10.6" cy="10.6" r="8.6"/>
+      <path d="M17.135,17.135l4.865,4.865"/>
+      <path d="M6.865,10.649l7.567,0"/>
+      {{#if in}}
+        <path d="M10.649,6.865l0,7.567"/>
+      {{/if}}
+    </g>
+  </svg>
+</template>

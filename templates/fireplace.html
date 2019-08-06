@@ -3,7 +3,7 @@
     <div class="fireplace-overlay" style="{{overlayStyles background}}"></div>
     {{#if isLoading}}
       <div class="fireplace-loader">
-        {{> Template.dynamic template=(spinnerTempl loaderTemplate) data='' }}
+        {{> Template.dynamic template=(spinnerTmpl loaderTemplate) data='' }}
       </div>
     {{/if}}
     <div class="fireplace-content">
@@ -11,6 +11,9 @@
         <div class="fireplace-count">
           <span class="fireplace-count__value">{{imageCountLabel}}</span>
         </div>
+        <button type="button" aria-label="Zoom" class="fireplace-zoom fireplace-button">
+          {{> Template.dynamic template=(zoomTmpl zoomIconTemplate) data=(zoomButtonIconProps layoutMode) }}
+        </button>
         {{#if isFullscreenAvailable}}
           <button type="button" aria-label="Fullscreen" class="fireplace-fullscreen fireplace-button">
             {{> Template.dynamic template=(fullscreenTmpl enterFullscreenTemplate exitFullscreenTemplate) data='' }}
@@ -25,7 +28,7 @@
           {{> Template.dynamic template=(prevTmpl prevIconTemplate) data='' }}
         </button>
         <div class="fireplace-content__middle" style={{imageContainerStyles maxImageWidth}}>
-          <figure class={{imageContainerClass layout}}>
+          <figure class={{imageContainerClass layoutMode}}>
             <img
               class="fireplace-image"
               src={{currentImage.src}}
