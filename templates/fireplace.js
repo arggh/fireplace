@@ -24,8 +24,8 @@ const DEFAULT_TEMPLATES = {
 };
 
 const IMAGE_CONTAINER_CLASSES = {
-  cover: 'fireplace-content__image--cover',
-  contain: 'fireplace-content__image--contain'
+  cover: 'fireplace--cover',
+  contain: 'fireplace--contain'
 };
 
 const LAYOUT_MODES = {
@@ -265,6 +265,14 @@ Template.Fireplace.helpers({
   layoutMode() {
     const instance = Template.instance();
     return resolveLayoutMode(instance.layoutMode.get());
+  },
+
+  showCaption(image, layoutMode) {
+    const isContainMode = layoutMode === LAYOUT_MODES.contain;
+
+    if (isContainMode) return true;
+
+    return !!image.caption || !!image.copyright;
   },
 
   isFullscreenAvailable() {

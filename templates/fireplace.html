@@ -23,28 +23,32 @@
           {{> Template.dynamic template=(closeTmpl closeIconTemplate) data='' }}
         </button>
       </div>
-      <div class="fireplace-content__main">
-        <button type="button" class="fireplace-button__prev fireplace-button" disabled={{isPrevButtonDisabled}} >
-          {{> Template.dynamic template=(prevTmpl prevIconTemplate) data='' }}
-        </button>
-        <div class="fireplace-content__middle" style={{imageContainerStyles maxImageWidth}}>
-          <figure class={{imageContainerClass layoutMode}}>
+      <figure class="fireplace-content__main">
+        <div class="fireplace-content__middle {{imageContainerClass layoutMode}}" style={{imageContainerStyles maxImageWidth}}>
             <img
               class="fireplace-image"
               src={{currentImage.src}}
               srcSet={{formatSrcSetAttr currentImage.srcSet}}
               sizes='100vw'
               alt={{currentImage.alt}}
-            >
-
-            <figcaption class="fireplace-caption">{{currentImage.caption}}{{#if currentImage.copyright}}<small>{{currentImage.copyright}}</small>{{/if}}</figcaption>
-          </figure>
+            />
         </div>
-        <button type="button" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >
-          {{> Template.dynamic template=(nextTmpl nextIconTemplate) data='' }}
-        </button>
-      </div>
-      <div class="fireplace-content__footer"></div>
+        
+        <figcaption class="fireplace-caption {{#if showCaption currentImage layoutMode}}fireplace-caption--visible{{/if}}">
+          <span class="fireplace-caption__inner">
+            <span class="fireplace-caption__center">
+              {{currentImage.caption}}
+              <small>{{currentImage.copyright}}</small>
+            </span>
+          </span>
+        </figcaption>
+      </figure>
     </div>
+    <button type="button" class="fireplace-button__prev fireplace-button" disabled={{isPrevButtonDisabled}} >
+      {{> Template.dynamic template=(prevTmpl prevIconTemplate) data='' }}
+    </button>
+    <button type="button" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >
+      {{> Template.dynamic template=(nextTmpl nextIconTemplate) data='' }}
+    </button>
   </div>
 </template>
