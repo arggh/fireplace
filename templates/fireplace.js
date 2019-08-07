@@ -199,12 +199,14 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
     const oneAfter = Math.max(0, Math.min(nextIndex + delta, maxIndex));
     const twoAfter = Math.max(0, Math.min(nextIndex + (delta * 2), maxIndex));
 
-    this.currentIndex.set(nextIndex);
-    this.loaderTimeout = setTimeout(() => this.loading.set(true), 50);
+    if (current !== nextIndex) {
+      this.currentIndex.set(nextIndex);
+      this.loaderTimeout = setTimeout(() => this.loading.set(true), 50);
 
-    preload(images[oneAfter]).then(() => {
-      preload(images[twoAfter]);
-    });
+      preload(images[oneAfter]).then(() => {
+        preload(images[twoAfter]);
+      });
+    }
   };
 
   this.toggleFullscreen = () => {
