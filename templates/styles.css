@@ -270,7 +270,7 @@
   height: 32px;
   padding: 8px;
   overflow: visible;
-  border-radius: 50%;
+  
 }
 
 .fireplace-button:focus, .fireplace-button:active {
@@ -280,7 +280,7 @@
 
 .fireplace-button:focus svg {
   transform: scale(1.1);
-  box-shadow: 0 0 0 3px rgba(50,0,50,0.2);
+  box-shadow: inset 0 0 0 3px rgba(50,0,50,0.2);
 }
 
 @keyframes FireplacePop {
