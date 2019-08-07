@@ -86,8 +86,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-wrap: nowrap;
   margin: 0;
+  overflow: hidden;
 }
 
 
@@ -126,13 +126,7 @@
 
 .fireplace-content__middle {
   max-width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.fireplace-content__image {
+  overflow: hidden;
   flex: auto;
 }
 
@@ -152,7 +146,6 @@
 
 .fireplace--contain {
   max-width: 100%;
-  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -161,7 +154,6 @@
 
 .fireplace--contain img,
 .fireplace--cover img {
-  width: 100%;
   height: 100%;
 }
 
@@ -171,6 +163,7 @@
 
 .fireplace--cover img {
   object-fit: cover;
+  width: 100%;
 }
 
 .fireplace-content__footer {
@@ -183,6 +176,7 @@
 }
 
 .fireplace-caption {
+  flex: none;
   position: relative;
   display: block;
   margin-top: auto;

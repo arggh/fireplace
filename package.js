@@ -1,6 +1,6 @@
 Package.describe({
   name: 'arggh:fireplace',
-  version: '0.0.9',
+  version: '0.0.10',
   summary: 'Fireplace is a minimalist lightbox component for Blaze',
   git: 'https://github.com/arggh/fireplace',
   documentation: 'README.md'
