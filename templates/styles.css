@@ -155,6 +155,7 @@
 .fireplace--contain img,
 .fireplace--cover img {
   height: 100%;
+  overflow: hidden;
 }
 
 .fireplace--contain img {
