@@ -236,7 +236,9 @@ Template.Fireplace.onCreated(function onFireplaceCreated() {
 });
 
 Template.Fireplace.onRendered(function onFireplaceCreated() {
-  this.firstNode.classList.add(WRAPPER_CLASSES.reveal);
+  const wrapper = this.firstNode;
+  wrapper.classList.add(WRAPPER_CLASSES.reveal);
+  wrapper.focus();
 });
 
 Template.Fireplace.onDestroyed(function onFireplaceCreated() {

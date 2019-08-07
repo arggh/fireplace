@@ -1,5 +1,5 @@
 <template name="Fireplace">
-  <div class="fireplace-container">
+  <div class="fireplace-container" tabindex="-1">
     <div class="fireplace-overlay" style="{{overlayStyles background}}"></div>
     {{#if isLoading}}
       <div class="fireplace-loader">
@@ -44,10 +44,10 @@
         </figcaption>
       </figure>
     </div>
-    <button type="button" class="fireplace-button__prev fireplace-button" disabled={{isPrevButtonDisabled}} >
+    <button type="button" aria-label="Previous image" class="fireplace-button__prev fireplace-button" disabled={{isPrevButtonDisabled}} >
       {{> Template.dynamic template=(prevTmpl prevIconTemplate) data='' }}
     </button>
-    <button type="button" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >
+    <button type="button" aria-label="Next image" class="fireplace-button__next fireplace-button" disabled={{isNextButtonDisabled}} >
       {{> Template.dynamic template=(nextTmpl nextIconTemplate) data='' }}
     </button>
   </div>

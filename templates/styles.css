@@ -258,9 +258,9 @@
 }
 
 .fireplace-button svg {
-  display: inline-block;
+  display: block;
   position: relative;
-  transition-property: transform;
+  transition-property: transform, box-shadow;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
   border-radius: 50%;
@@ -269,15 +269,17 @@
   height: 32px;
   padding: 8px;
   overflow: visible;
+  border-radius: 50%;
 }
 
-.fireplace-button:focus {
+.fireplace-button:focus, .fireplace-button:active {
   box-shadow: none;
   outline: none;
 }
 
 .fireplace-button:focus svg {
   transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(50,0,50,0.2);
 }
 
 @keyframes FireplacePop {
