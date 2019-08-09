@@ -88,6 +88,7 @@
   justify-content: space-between;
   margin: 0;
   overflow: hidden;
+  user-select: none;
 }
 
 
@@ -155,6 +156,7 @@
 .fireplace--contain img,
 .fireplace--cover img {
   height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -164,7 +166,6 @@
 
 .fireplace--cover img {
   object-fit: cover;
-  width: 100%;
 }
 
 .fireplace-content__footer {
