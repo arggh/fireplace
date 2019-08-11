@@ -38,7 +38,12 @@
           <span class="fireplace-caption__inner">
             <span class="fireplace-caption__center">
               {{currentImage.caption}}
-              <small>{{currentImage.copyright}}</small>
+              {{#if currentImage.copyright}}
+                <small>
+                  <span class="fireplace-copyright">©</span>
+                  {{currentImage.copyright}}
+                </small>
+              {{/if}}
             </span>
           </span>
         </figcaption>

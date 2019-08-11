@@ -99,12 +99,12 @@
   }
 }
 
-.fireplace-button__prev, .fireplace-button__next {
+.fireplace-button.fireplace-button__prev, .fireplace-button__next {
   position: absolute;
   top: 4rem;
   bottom: 4rem;
   z-index: 3;
-  width: 4rem;
+  padding: .5rem;
   flex: none;
   display: flex;
   justify-content: center;
@@ -112,12 +112,14 @@
   transition: opacity 200ms ease-in-out;
 }
 
-.fireplace-button__prev {
+.fireplace-button.fireplace-button__prev {
   left: 0;
+  padding-left: 1rem;
 }
 
-.fireplace-button__next {
+.fireplace-button.fireplace-button__next {
   right: 0;
+  padding-right: 1rem;
 }
 
 .fireplace-button__prev[disabled], .fireplace-button__next[disabled] {
@@ -151,6 +153,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+img.fireplace-image {
+  flex: auto;
 }
 
 .fireplace--contain img,
@@ -192,7 +198,7 @@
 
 .fireplace-caption__inner {
   display: block;
-  height: 100%;
+  min-height: 50px;
   transition-property: color, background-color;
   transition-delay: 150ms;
   transition-duration: 250ms;
@@ -236,8 +242,7 @@
   display: block;
 }
 
-.fireplace-caption small:before {
-  content:  '©️';
+.fireplace-copyright {
   display: inline;
   margin-right: 4px;
   color: inherit;
@@ -253,6 +258,11 @@
   padding: 0;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition-property: opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 
 .fireplace-button + .fireplace-button {
@@ -277,6 +287,10 @@
 .fireplace-button:focus, .fireplace-button:active {
   box-shadow: none;
   outline: none;
+}
+
+.fireplace-button:active {
+  opacity: 0.8;
 }
 
 .fireplace-button:focus svg {
