@@ -136,7 +136,7 @@
 .fireplace--contain,
 .fireplace--cover {
   text-align: center;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .fireplace--cover {
