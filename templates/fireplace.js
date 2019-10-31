@@ -301,9 +301,9 @@ Template.Fireplace.helpers({
     return background ? `background: ${background};` : '';
   },
 
-  imageContainerStyles(maxImageWidth) {
-    const isContained = resolveLayoutMode(Template.currentData().layout) === 'contain';
-    return maxImageWidth && isContained ? `width: ${maxImageWidth}px` : '';
+  imageContainerStyles(maxImageWidth, layoutMode) {
+    const isContained = layoutMode === 'contain';
+    return (maxImageWidth && isContained) ? `width: ${maxImageWidth}px` : 'width: 100%;';
   },
 
   zoomButtonIconProps(layout) {
